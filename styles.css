@@ -22,6 +22,10 @@ button {
     background-color: rgb(50, 50, 50);
     margin: 0px;
     border-radius: 5px;
+    color: white;
+    font-size: 3rem;
+    text-align: right;
+    padding: 20px;
 }
 
 .clear {
