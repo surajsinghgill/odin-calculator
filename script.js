@@ -34,6 +34,15 @@ function operate(operator, operand1, operand2) {
     }
 }
 
+function clear(){
+    document.querySelector(".screen").textContent = "";
+}
+
+function backspace() {
+    let string = document.querySelector(".screen").textContent; 
+    document.querySelector(".screen").textContent = string.slice(0, string.length - 1);
+}
+
 document.querySelectorAll(".digits").forEach(digit => {
     digit.addEventListener("click", function(event){
         document.querySelector(".screen").textContent += event.target.textContent;
@@ -74,12 +83,27 @@ document.querySelectorAll(".operators").forEach(operator => {
             num1 = result;
             operatorString = event.target.textContent;
             document.querySelector(".screen").textContent = `${result} ${event.target.textContent} `;
+            document.querySelector(".decimal").removeAttribute("disabled");
         }
         else {
             num1 = Number(string);
             operatorString = event.target.textContent;
             document.querySelector(".screen").textContent += ` ${operatorString} `;
+            document.querySelector(".decimal").removeAttribute("disabled");
         }
     })
 })
 
+document.querySelector(".clear").addEventListener("click", clear);
+
+document.querySelector(".backspace").addEventListener("click", backspace);
+
+document.querySelector(".decimal").addEventListener("click", function(event) {
+    const string = document.querySelector(".screen").textContent;
+    if (!string) {
+        alert("Please enter digit first");
+        return;
+    }
+    document.querySelector(".screen").textContent += `${event.target.textContent}`;
+    event.target.setAttribute("disabled", "disabled");
+})
